@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Weather</title>
+    <meta
+      name="description"
+      content="A fast, mobile-first weather page for today."
+    />
+    <meta name="theme-color" content="#0b1220" />
+    <link rel="preconnect" href="https://api.open-meteo.com" />
+    <link rel="preconnect" href="https://geocoding-api.open-meteo.com" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="topbar" role="banner">
+      <div class="container topbar__inner">
+        <div class="brand" aria-label="Our Weather">
+          <div class="brand__mark" aria-hidden="true"></div>
+          <div class="brand__text">
+            <div class="brand__title">Our Weather</div>
+            <div class="brand__subtitle" id="todayLabel">Today</div>
+          </div>
+        </div>
+
+        <div class="topbar__actions">
+          <button class="icon-btn" id="refreshBtn" type="button">
+            <span class="icon-btn__icon" aria-hidden="true">↻</span>
+            <span class="icon-btn__label">Refresh</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="container" role="main">
+      <section class="card hero" aria-labelledby="heroTitle">
+        <div class="hero__left">
+          <h1 class="h1" id="heroTitle">Today’s Weather</h1>
+          <p class="muted" id="heroHint">
+            Use your location for the most accurate result, or search a city.
+          </p>
+
+          <form class="search" id="searchForm" autocomplete="off" novalidate>
+            <label class="sr-only" for="cityInput">Search city</label>
+            <input
+              class="input"
+              id="cityInput"
+              name="city"
+              type="text"
+              inputmode="search"
+              placeholder="Search a city (e.g., Tokyo)"
+              minlength="2"
+              aria-describedby="heroHint"
+            />
+            <button class="btn btn--secondary" type="submit" id="searchBtn">
+              Search
+            </button>
+          </form>
+
+          <button class="btn btn--primary" id="geoBtn" type="button">
+            Use my location
+          </button>
+        </div>
+
+        <div class="hero__right" aria-live="polite" aria-atomic="true">
+          <div class="metric" aria-label="Current conditions">
+            <div class="metric__row">
+              <div class="metric__temp skeleton" id="tempValue">--°</div>
+              <div class="metric__meta">
+                <div class="metric__place skeleton" id="placeValue">—</div>
+                <div class="metric__desc skeleton" id="descValue">—</div>
+              </div>
+            </div>
+
+            <div class="chips" aria-label="Details">
+              <div class="chip skeleton" id="hiValue">High: --°</div>
+              <div class="chip skeleton" id="loValue">Low: --°</div>
+              <div class="chip skeleton" id="windValue">Wind: --</div>
+              <div class="chip skeleton" id="updatedValue">Updated: --</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="moreTitle">
+        <h2 class="h2" id="moreTitle">What this page shows</h2>
+        <ul class="list">
+          <li class="list__item">
+            <span class="list__label">Temperature</span>
+            <span class="list__value">Current + today’s high/low</span>
+          </li>
+          <li class="list__item">
+            <span class="list__label">Wind</span>
+            <span class="list__value">Current wind speed</span>
+          </li>
+          <li class="list__item">
+            <span class="list__label">Local time</span>
+            <span class="list__value">Uses the location’s timezone</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="status" aria-live="polite" aria-atomic="true">
+        <div class="status__pill" id="statusPill" hidden>
+          <span class="status__dot" aria-hidden="true"></span>
+          <span id="statusText">Loading…</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="container footer__inner">
+        <span class="muted">
+          Weather data by Open‑Meteo (no API key). This page runs fully client-side.
+        </span>
+      </div>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
